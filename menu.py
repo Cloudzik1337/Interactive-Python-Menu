@@ -1,18 +1,13 @@
 # Remake menu.py using a class system
-# Version: 1.0.1
+# Version: 1.0.2
 
 # Import necessary libraries
 import os
 import keyboard
-import colorama
-
-# Function to clear the console screen
-def cls():
-    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Class definition for the menu system
 class Menu:
-    def __init__(self, options, color=colorama.Fore.CYAN):
+    def __init__(self, options, color='\033[36m'):  # Use ANSI escape code for color
         self.options = options
         self.color = color
         self.index = 0
@@ -23,13 +18,9 @@ class Menu:
         self.create_menu()
 
     def create_menu(self):
-        # Initialize colorama for colored console output
-        colorama.init(autoreset=True)
-
         # Create a dictionary mapping index to menu options
-        for option in self.options:
-            self.json[self.index] = option
-            self.index += 1
+        for index, option in enumerate(self.options):
+            self.json[index] = option
 
         # Set up hotkeys for navigation
         keyboard.add_hotkey('up', self.up, suppress=True)
@@ -46,15 +37,11 @@ class Menu:
 
     def up(self):
         # Move the selection index up
-        self.index -= 1
-        if self.index < 0:
-            self.index = self.index_max - 1
+        self.index = (self.index - 1) % self.index_max
 
     def down(self):
         # Move the selection index down
-        self.index += 1
-        if self.index >= self.index_max:
-            self.index = 0
+        self.index = (self.index + 1) % self.index_max
 
     def enter(self):
         # Set the selected option based on the current index
@@ -66,14 +53,11 @@ class Menu:
         self.selected = None
 
         # Display the menu options with highlighting for the selected option
-        while True:
-            if self.selected is not None:
-                # Break the loop if an option is selected
-                break
+        while self.selected is None:
             if self.last_known_index != self.index:
                 # Update the screen with the current menu state
                 self.last_known_index = self.index
-                cls()
+                self.cls()
 
                 for i in range(self.index_max):
                     if i == self.index:
@@ -83,6 +67,13 @@ class Menu:
 
         # Set the selected value to the corresponding menu option
         self.selected = self.json[self.selected]
-        return
 
+    @staticmethod
+    def cls():
+        # Clear the console screen
+        os.system('cls' if os.name == 'nt' else 'printf "\033c"')
 
+# Example usage:
+options = ["Option 1", "Option 2", "Option 3"]
+menu = Menu(options)
+print("Selected option:", menu.selected)
