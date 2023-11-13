@@ -10,7 +10,7 @@ Keep in mind this project is simple and probbably i wont care to fix errors but 
 
 ## Demo
 
-![Example Video](https://raw.githubusercontent.com/your-username/your-repo/master/path/to/your/video/example.mp4)
+![Example Video](https://github.com/Cloudzik1337/Interactive-Python-Menu/blob/main/showcase/y4k1yk.gif?raw=true)
 
 ## Usage
 
