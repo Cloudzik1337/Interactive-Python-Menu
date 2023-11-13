@@ -1,4 +1,4 @@
-# Interactive Python Menu
+ # Interactive Python Menu
 
 This Python script provides a simple interactive menu using the `keyboard` library. Users can navigate through the menu options using arrow keys and select an option by pressing Enter.
 Keep in mind this project is simple and probbably i wont care to fix errors but issues tab are yours!
@@ -21,7 +21,7 @@ pip install colorama
 pip install keyboard
 ```
 2. Drag menu.py to your project:
-3. Import menu.py and use `create_menu(options, color)` module
+3. Import menu.py and use `menu.Menu(options, color)` module
 ## Example
 ```python
 import menu
