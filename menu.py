@@ -1,88 +1,88 @@
+# Remake menu.py using a class system
+# Version: 1.0.1
+
 # Import necessary libraries
-import colorama
 import os
 import keyboard
+import colorama
 
-# Initialize colorama for cross-platform colored output
-colorama.init(autoreset=True)
-
-# Define a function to clear the console screen based on the operating system
+# Function to clear the console screen
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-# Initialize global variables
-selected = None
-index = 0
+# Class definition for the menu system
+class Menu:
+    def __init__(self, options, color=colorama.Fore.CYAN):
+        self.options = options
+        self.color = color
+        self.index = 0
+        self.index_max = len(options)
+        self.selected = None
+        self.json = {}
+        self.last_known_index = 1
+        self.create_menu()
 
-# Function to create a menu with the given options
-def create_menu(options, color=colorama.Fore.CYAN):
-    # Create a dictionary to store options with their corresponding index
-    json = {}
-    global index, index_max
-    index = 0
-    index_max = len(options)
-    
-    # Populate the dictionary with options and their indices
-    for option in options:
-        json[index] = option
-        index += 1
-    
-    # Bind keys for menu navigation
-    keyboard.add_hotkey('up', up, suppress=True)
-    keyboard.add_hotkey('down', down, suppress=True)
-    keyboard.add_hotkey('enter', enter, suppress=True)
-    keyboard.add_hotkey('right', enter, suppress=True)
-    
-    # Display the menu and return the selected option
-    to_ret = display(json, color)
-    keyboard.unhook_all()
-    return to_ret
+    def create_menu(self):
+        # Initialize colorama for colored console output
+        colorama.init(autoreset=True)
 
-# Function to handle the "up" key press
-def up():
-    global index
-    index -= 1
-    if index < 0:
-        index = index_max - 1
+        # Create a dictionary mapping index to menu options
+        for option in self.options:
+            self.json[self.index] = option
+            self.index += 1
 
-# Function to handle the "down" key press
-def down():
-    global index
-    index += 1
-    if index >= index_max:
-        index = 0
+        # Set up hotkeys for navigation
+        keyboard.add_hotkey('up', self.up, suppress=True)
+        keyboard.add_hotkey('down', self.down, suppress=True)
+        keyboard.add_hotkey('enter', self.enter, suppress=True)
+        keyboard.add_hotkey('right', self.enter, suppress=True)
 
-# Function to handle the "enter" key press
-def enter():
-    global selected, index
-    selected = index
+        # Display the menu and wait for user input
+        self.display()
 
-# Function to display the menu options and handle user input
-def display(options_json, color):
-    last_known_index = 1
-    
-    global index, index_max, selected
-    index = 0
-    selected = None
-    
-    # Loop to continuously display the menu and wait for user input
-    while True:
-        if selected is not None:
-            break
-        if last_known_index != index:
-            last_known_index = index
-            cls()
-            
-            # Display menu options with highlighting for the selected option
-            for i in range(index_max):
-                if i == index:
-                    print(color + options_json[i])
-                else:
-                    print(options_json[i])
-    
-    return options_json[selected]
+        # Unhook all hotkeys after menu display
+        keyboard.unhook_all()
+        return self.selected
 
-# Example usage with test options (commented out for now)
-test_options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]
-answer = create_menu(test_options, color=colorama.Fore.CYAN)
-print(colorama.Fore.GREEN + f"Selected {answer}")
+    def up(self):
+        # Move the selection index up
+        self.index -= 1
+        if self.index < 0:
+            self.index = self.index_max - 1
+
+    def down(self):
+        # Move the selection index down
+        self.index += 1
+        if self.index >= self.index_max:
+            self.index = 0
+
+    def enter(self):
+        # Set the selected option based on the current index
+        self.selected = self.index
+
+    def display(self):
+        # Initialize index and selected values
+        self.index = 0
+        self.selected = None
+
+        # Display the menu options with highlighting for the selected option
+        while True:
+            if self.selected is not None:
+                # Break the loop if an option is selected
+                break
+            if self.last_known_index != self.index:
+                # Update the screen with the current menu state
+                self.last_known_index = self.index
+                cls()
+
+                for i in range(self.index_max):
+                    if i == self.index:
+                        print(self.color + self.json[i])
+                    else:
+                        print(self.json[i])
+
+        # Set the selected value to the corresponding menu option
+        self.selected = self.json[self.selected]
+        return
+
+
