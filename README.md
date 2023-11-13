@@ -34,5 +34,13 @@ menu = menu.Menu(test_options, color=colorama.Fore.CYAN)
 print(colorama.Fore.GREEN + f"Selected {menu.selected}")
   
 ```
+## Plans
+1. Add style presets
+2. Center Menu (pystyle lib)
+3. Find way to only supress arrow keys in terminal not whole system
+4. Make large options (>10) list split i half
+5. Allow user get index number of user choice
+6. Add proper exceptions handling
+
 ## License 
 This project is licensed under the MIT License - see the LICENSE file for details.
