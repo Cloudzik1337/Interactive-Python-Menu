@@ -29,9 +29,9 @@ import colorama
 
 test_options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]
 
-answer = menu.create_menu(test_options, color=colorama.Fore.CYAN)
+menu = menu.Menu(test_options, color=colorama.Fore.CYAN)
 
-print(colorama.Fore.GREEN + f"Selected {answer}")
+print(colorama.Fore.GREEN + f"Selected {menu.selected}")
   
 ```
 ## License 
