@@ -1,12 +1,12 @@
  # Interactive Python Menu
 
 This Python script provides a simple interactive menu using the `keyboard` library. Users can navigate through the menu options using arrow keys and select an option by pressing Enter.
-Keep in mind this project is simple and probbably i wont care to fix errors but issues tab are yours!
+Keep in mind this project is simple and I probably won't care to fix errors but the issues tab is yours!
 ## Features
 
 - Navigate through menu options using the arrow keys.
 - Select an option by pressing `Enter` or the `right arrow` key.
-- Cross-platform support for colored output.
+- Cross-platform support for coloured output.
 
 ## Demo
 
@@ -37,10 +37,10 @@ print(colorama.Fore.GREEN + f"Selected {menu.selected}")
 ## Plans
 1. Add style presets
 2. Center Menu (pystyle lib)
-3. Find way to only supress arrow keys in terminal not whole system
-4. Make large options (>10) list split i half
-5. Allow user get index number of user choice
-6. Add proper exceptions handling
+3. Find a way to only suppress arrow keys in the terminal not whole system
+4. Make large options (>10) list split in half
+5. Allow the user get the index number of user choice
+6. Add proper exception handling
 
 ## License 
 This project is licensed under the MIT License - see the LICENSE file for details.
