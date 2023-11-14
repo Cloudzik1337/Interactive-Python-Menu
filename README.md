@@ -47,6 +47,7 @@ print(menu.Colors.GREEN f"Selected {menu_ex.selected}, index = {menu_ex.selected
 4. Make large options (>10) list split in half ✘
 5. Allow the user get the index number of user choice ✔ Done
 6. Add proper exception handling ✘
+7. Let user define text that would be printed before menu so it wont clear cmd ✘
 
 ## License 
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/Cloudzik1337/Interactive-Python-Menu/blob/main/LICENSE) file for details.
