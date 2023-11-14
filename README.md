@@ -9,8 +9,8 @@ Keep in mind this project is simple and I probably won't care to fix errors but 
 - Cross-platform support for coloured output.
 
 ## Demo
-`style = 0`
-![Example Video](https://github.com/Cloudzik1337/Interactive-Python-Menu/blob/main/showcase/y4k1yk.gif?raw=true)
+Show Case of each style first option is style number (1, 2, 11, 22)
+![Example Video](https://github.com/Cloudzik1337/Interactive-Python-Menu/blob/main/showcase/bUZf5o.gif?raw=true)
 
 ## Usage
 
