@@ -73,7 +73,5 @@ class Menu:
         # Clear the console screen
         os.system('cls' if os.name == 'nt' else 'printf "\033c"')
 
-# Example usage:
-options = ["Option 1", "Option 2", "Option 3"]
-menu = Menu(options)
-print("Selected option:", menu.selected)
+
+
