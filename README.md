@@ -18,10 +18,15 @@ To use this interactive menu in your Python script, follow these steps:
 1. Install the required libraries:
   ```bash
 pip install keyboard (required)
-pip install colorama (required for older versions > 1.0.2)
+pip install pystyle (required for 1.0.3+)
+
+
+pip install colorama (required ONLY for older versions > 1.0.2)
+
 ```
 2. Drag menu.py to your project:
-3. Import menu.py and use `menu.Menu(options, color)` module
+3. Import menu.py and use `menu.Menu(options, color, style)` module
+4. To get user selected input use menu.selected for str or menu.selected_index for index of options dict
 ## Example
 ```python
 import menu
@@ -29,40 +34,19 @@ import menu
 
 test_options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]
 
-menu = menu.Menu(test_options, color='\033[36m'):  # Use ANSI escape code for color
+menu_ex = menu.Menu(test_options, color=Colors.CYAN, style=1)  # Use Colors.<color>  for color and style = 1,2,11,22 for styles
 
-print(colorama.Fore.GREEN + f"Selected {menu.selected}")
+print(menu.Colors.GREEN f"Selected {menu_ex.selected}, index = {menu_ex.selected_index}")
   
 ```
-## Colors
-|  FG |  BG | Color               |
-|-----|-----|---------------------|
-|  30 |  40 | Black               |
-|  31 |  41 | Red                 |
-|  32 |  42 | Green               |
-|  33 |  43 | Yellow              |
-|  34 |  44 | Blue                |
-|  35 |  45 | Magenta             |
-|  36 |  46 | Cyan                |
-|  37 |  47 | White               |
-|  90 | 100 | Bright Black (Gray) |
-|  91 | 101 | Bright Red          |
-|  92 | 102 | Bright Green        |
-|  93 | 103 | Bright Yellow       |
-|  94 | 104 | Bright Blue         |
-|  95 | 105 | Bright Magenta      |
-|  96 | 106 | Bright Cyan         |
-|  97 | 107 | Bright White        |
-
-So for example red would be `'\033[31m'`
 
 ## Plans
-1. Add style presets
-2. Center Menu (pystyle lib)
-3. Find a way to only suppress arrow keys in the terminal not whole system
-4. Make large options (>10) list split in half
-5. Allow the user get the index number of user choice
-6. Add proper exception handling
+1. Add style presets ✔ Done
+2. Center Menu (pystyle lib) ✔ Done
+3. Find a way to only suppress arrow keys in the terminal not whole system ✘
+4. Make large options (>10) list split in half ✘
+5. Allow the user get the index number of user choice ✔ Done
+6. Add proper exception handling ✘
 
 ## License 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Cloudzik1337/Interactive-Python-Menu/blob/main/LICENSE) file for details.
