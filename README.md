@@ -17,8 +17,8 @@ Keep in mind this project is simple and I probably won't care to fix errors but 
 To use this interactive menu in your Python script, follow these steps:
 1. Install the required libraries:
   ```bash
-pip install colorama (for older versions > 1.0.2)
-pip install keyboard
+pip install keyboard (required)
+pip install colorama (required for older versions > 1.0.2)
 ```
 2. Drag menu.py to your project:
 3. Import menu.py and use `menu.Menu(options, color)` module
