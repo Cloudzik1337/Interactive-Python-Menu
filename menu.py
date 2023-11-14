@@ -1,5 +1,5 @@
 # Remake menu.py using a class system
-# Version: 1.0.2
+# Version: 1.0.3
 
 # Import necessary libraries
 import os
