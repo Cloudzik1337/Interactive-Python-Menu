@@ -10,7 +10,7 @@ Keep in mind this project is simple and I probably won't care to fix errors but 
 
 ## Demo
 Show Case of each style first option is style number (1, 2, 11, 22)
-![Example Video](https://github.com/Cloudzik1337/Interactive-Python-Menu/blob/main/showcase/bUZf5o.gif?raw=true)
+![Example Video](https://github.com/Cloudzik1337/Interactive-Python-Menu/blob/main/showcase/evJFHb.gif?raw=true)
 
 ## Usage
 
