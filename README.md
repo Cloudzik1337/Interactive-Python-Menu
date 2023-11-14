@@ -17,7 +17,7 @@ Keep in mind this project is simple and I probably won't care to fix errors but 
 To use this interactive menu in your Python script, follow these steps:
 1. Install the required libraries:
   ```bash
-pip install colorama
+pip install colorama (for older versions > 1.0.2)
 pip install keyboard
 ```
 2. Drag menu.py to your project:
@@ -25,15 +25,37 @@ pip install keyboard
 ## Example
 ```python
 import menu
-import colorama
+
 
 test_options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]
 
-menu = menu.Menu(test_options, color=colorama.Fore.CYAN)
+menu = menu.Menu(test_options, color='\033[36m'):  # Use ANSI escape code for color
 
 print(colorama.Fore.GREEN + f"Selected {menu.selected}")
   
 ```
+## Colors
+|  FG |  BG | Color               |
+|-----|-----|---------------------|
+|  30 |  40 | Black               |
+|  31 |  41 | Red                 |
+|  32 |  42 | Green               |
+|  33 |  43 | Yellow              |
+|  34 |  44 | Blue                |
+|  35 |  45 | Magenta             |
+|  36 |  46 | Cyan                |
+|  37 |  47 | White               |
+|  90 | 100 | Bright Black (Gray) |
+|  91 | 101 | Bright Red          |
+|  92 | 102 | Bright Green        |
+|  93 | 103 | Bright Yellow       |
+|  94 | 104 | Bright Blue         |
+|  95 | 105 | Bright Magenta      |
+|  96 | 106 | Bright Cyan         |
+|  97 | 107 | Bright White        |
+
+So for example red would be `'\033[31m'`
+
 ## Plans
 1. Add style presets
 2. Center Menu (pystyle lib)
