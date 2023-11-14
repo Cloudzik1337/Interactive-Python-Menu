@@ -1,5 +1,5 @@
 # Remake menu.py using a class system
-# Version: 1.0.3
+# Version: 1.0.2
 
 # Import necessary libraries
 import os
@@ -121,7 +121,7 @@ class Menu:
         elif self.style == 11:
             for i in range(self.index_max):
                 if i == self.index:
-                    print(Center.XCenter(self.color + self.json[i] + Colors.ENDC))
+                    print(Center.XCenter(self.color + "         "+self.json[i] + Colors.ENDC))
                 else:
                     print(Center.XCenter(self.json[i]))
         elif self.style == 22:
