@@ -1,11 +1,29 @@
-# Remake menu.py using a class system
-# Version: 1.0.3
+
+# Version: 1.0.4
+
+
+
+
+"""
+
+                                                                                          > Cloudzik <
+                                                                                     Interactive-Python-Menu
+                                                                                             1.0.4
+                                                                                           15.11.2023
+                                                                     https://github.com/Cloudzik1337/Interactive-Python-Menu
+"""
+
+
+
+
+
+
 
 # Import necessary libraries
 import os
 import keyboard
 from pystyle import Center
-
+# Class definition for the menu colors
 class Colors:
     ENDC: str = '\033[0m'
     BOLD: str = '\033[1m'
@@ -41,9 +59,22 @@ class Colors:
     MAGENTAGREYBG: str = '\033[105m'
     CYANGREYBG: str = '\033[106m'
     WHITEGREYBG: str = '\033[107m'
-Colors = Colors() 
+
+# Class definition for the menu styles
+class Styles:
+    DEFAULT: int = 1
+    SELECTED: int = 2
+    ARROW: int = 3
+    CENTERED: int = 11
+    CENTEREDSELECTED: int = 22
+    ARROWCENTERED: int = 33
     
-    
+
+
+
+# Create instances of the classes
+Colors = Colors()  
+Styles = Styles()
 
 
 
@@ -52,13 +83,17 @@ Colors = Colors()
 
 # Class definition for the menu system
 class Menu:
-    def __init__(self, options, color=Colors.CYAN, style=1):  # Use ANSI escape code for color
+    def __init__(self, options, color=Colors.CYAN, style=Styles.DEFAULT, pretext=None):  # Use ANSI escape code for color
         """
-        :style: 1 = default, 2 = > option < style 11 = 1 but with a centered title 22 = 2 but with a centered title
+        
         :options: list of menu options format: ["Option 1", "Option 2", "Option 3"]
         :color: ANSI escape code for color format: Colors.CYAN
+        :style: menu style format: Styles.DEFAULT or Styles.SELECTED or Styles.CENTERED or Styles.CENTEREDSELECTED
+        :pretext: text to display before the menu otherwise it will earesed
         To get the selected option, use menu.selected or menu.selected_index
+
         """
+        self.pretext = str(pretext)
         self.style = style
         self.options = options
         self.color = color
@@ -103,34 +138,47 @@ class Menu:
         """ Parse the style and display the menu
         1 = default, 
         2 = > option < style 
+        3 = ↳ option style
         11 = 1 but with a centered title 
         22 = 2 but with a centered title
+        33 = 3 but with a centered title
         """
         if self.style == 1:
-            for i in range(self.index_max):
-                if i == self.index:
-                    print(self.color + self.json[i] + Colors.ENDC)
-                else:
-                    print(self.json[i])
+            parsed_chosen = "print(self.color  + self.json[self.index] + Colors.ENDC)"
+            parsed = "print(self.json[i])"
+            self._print_menu(parsed, parsed_chosen)
         elif self.style == 2:
-            for i in range(self.index_max):
-                if i == self.index:
-                    print(self.color + "> " + self.json[i] + " <" + Colors.ENDC)
-                else:
-                    print(self.json[i])
+            parsed_chosen = "print(self.color + '> ' + self.json[self.index] + ' <' + Colors.ENDC)"
+            parsed = "print(self.json[i])"
+            self._print_menu(parsed, parsed_chosen)
+        elif self.style == 3:
+            parsed_chosen = "print(self.color + '↳ ' + self.json[self.index] + Colors.ENDC)"
+            parsed = "print(self.json[i])"
+            self._print_menu(parsed, parsed_chosen)
         elif self.style == 11:
-            for i in range(self.index_max):
-                if i == self.index:
-                    print(Center.XCenter(self.color + "         "+self.json[i] + Colors.ENDC))
-                else:
-                    print(Center.XCenter(self.json[i]))
+            parsed_chosen = "print(Center.XCenter(self.color + '          ' + self.json[self.index] +  Colors.ENDC))"
+            parsed = "print(Center.XCenter(self.json[i]))"
+            self._print_menu(parsed, parsed_chosen, center=True)
         elif self.style == 22:
-            for i in range(self.index_max):
-                if i == self.index:
-                    #blank space for centering
-                    print(Center.XCenter(self.color + "         > " + self.json[i] + " <" + Colors.ENDC))
-                else:
-                    print(Center.XCenter(self.json[i]))
+            parsed_chosen = "print(Center.XCenter(self.color + '         > ' + self.json[self.index] + ' <' + Colors.ENDC))"
+            parsed = "print(Center.XCenter(self.json[i]))"
+            self._print_menu(parsed, parsed_chosen, center=True)
+        elif self.style == 33:
+            parsed_chosen = "print(Center.XCenter(self.color + '         ↳ ' + self.json[self.index] + Colors.ENDC))"
+            parsed = "print(Center.XCenter(self.json[i]))"
+            self._print_menu(parsed, parsed_chosen, center=True)
+
+
+    def _print_menu(self, parsed, parsed_chosen, center=False):
+        """By doing this i belive that i have made the code more readable and easier to understand"""
+        if self.pretext != None:
+            if center == True:print(Center.XCenter(self.pretext))
+            else:print(self.pretext)
+        for i in range(self.index_max):
+            if i == self.index:
+                exec(parsed_chosen)
+            else:
+                exec(parsed)
 
 
     def _display(self):
@@ -156,22 +204,5 @@ class Menu:
         # Clear the console screen
         os.system('cls' if os.name == 'nt' else 'printf "\033c"')
 
-# Example usage:
-
-# options = ["Style1", "Option 2", "Option 3", "Option 4", "Option 5"]
-# menu = Menu(options, Colors.CYAN, 1)
-# print("Selected option:", menu.selected)
-
-# options = ["Style2", "Option 2", "Option 3", "Option 4", "Option 5"]
-# menu = Menu(options, Colors.CYAN, 2)
-# print("Selected option:", menu.selected)
-
-# options = ["Style11", "Option 2", "Option 3", "Option 4", "Option 5"]
-# menu = Menu(options, Colors.CYAN, 11)
-# print("Selected option:", menu.selected)
-
-# options = ["Style22", "Option 2", "Option 3", "Option 4", "Option 5"]
-# menu = Menu(options, Colors.CYAN, 22)
-# print("Selected option:", menu.selected)
 
 
