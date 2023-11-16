@@ -25,8 +25,9 @@ pip install colorama (required ONLY for older versions > 1.0.2)
 
 ```
 2. Drag menu.py to your project:
-3. Import menu.py and use `menu.Menu(options, color=Colors.CYAN, style=Styles.DEFAULT, pretext=None)` module
-4. To get user selected input use menu.selected for str or menu.selected_index for index of options dict
+3. Import menu.py and use `ex_menu = menu.Menu(options, color=Colors.CYAN, style=Styles.DEFAULT, pretext=None)` module
+4. `User_choice = ex_menu.launch(response="String")` # String Or index will be returned to User_choice var or just step 5
+5. To get user selected input use menu.selected for str or menu.selected_index for index of options dict
 ## Example
 ```python
 import menu
@@ -35,8 +36,8 @@ import menu
 test_options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"]
 
 menu_ex = menu.Menu(test_options, color=Colors.CYAN, style=Styles.DEFAULT, pretext = None)  # Use Colors.<color>  for color and style = Syles.<style> For pretext take dump of your currently displayed cmd and provide content as string
-
-print(menu.Colors.GREEN f"Selected {menu_ex.selected}, index = {menu_ex.selected_index}")
+User_choice = menu_ex.launch(response = "String") # can be String or Index its aditional if you use menu_ex.selected or menu_ex.selected_index you can replace this with menu_ex.launch()
+print(menu.Colors.GREEN f"Selected {menu_ex.selected}, index = {menu_ex.selected_index}, {User_choice}")
   
 ```
 
